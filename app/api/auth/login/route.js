@@ -33,7 +33,7 @@ export const POST = async (request) => {
       }
     } catch (error) {
       console.log(error);
-      return new Response("Something went wrong => Register User", {
+      return new Response("Something went wrong => Login User", {
         status: 500,
       });
     }
