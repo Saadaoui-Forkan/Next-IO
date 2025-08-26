@@ -1,23 +1,26 @@
-import { Schema, model, models } from "mongoose";
+import mongoose from 'mongoose'
 
-const TagSchema = new Schema(
-  {
+const { Schema } = mongoose
+
+const schema = new Schema({
     name: {
-      type: String,
+        type: String
     },
     slug: {
-      type: String,
-      unique: true,
+        type: String,
+        unique: true
     },
     description: {
-      type: String,
-    },
-  },
-  {
-    timestamps: true,
-  }
-);
+        type: String
+    }
+})
 
-const Tag = models.Tag || model("Tag", TagSchema);
+schema.virtual('id').get(function() {
+   return this._id
+})
 
-export default Tag;
+schema.set('toJSON', {
+   virtuals: true
+})
+
+export default mongoose.models?.Tag || mongoose.model('Tag', schema)
